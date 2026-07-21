@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,39 +11,30 @@ function Login() {
     e.preventDefault();
 
     try {
-
       const res = await axios.post(
-        "http://localhost:3002/login",
+        "https://zerodha-clone-project-gd4n.onrender.com/login",
         {
           email,
           password,
-        }
+        },
       );
 
       if (res.data.success) {
+        localStorage.setItem("token", res.data.token);
 
-           localStorage.setItem("token", res.data.token);
+        alert("Login Successful");
 
-           alert("Login Successful");
-
-           window.location.href="http://localhost:3001";
-
-      }    else {
-
-           alert(res.data.message);
-
+        window.location.href = "http://localhost:3001";
+      } else {
+        alert(res.data.message);
       }
-
     } catch (err) {
-
       console.log(err);
       alert("Login Failed");
-
     }
   };
 
   return (
-
     <div
       style={{
         width: "350px",
@@ -52,11 +42,9 @@ function Login() {
         textAlign: "center",
       }}
     >
-
       <h2>Login</h2>
 
       <form onSubmit={handleSubmit}>
-
         <input
           type="email"
           placeholder="Email"
@@ -77,14 +65,9 @@ function Login() {
         <br />
         <br />
 
-        <button type="submit">
-          Login
-        </button>
-
+        <button type="submit">Login</button>
       </form>
-
     </div>
-
   );
 }
 
