@@ -10,13 +10,13 @@ function Universe() {
           partner platforms
         </p>
         <div className="col-4 p-3 mt-5 ">
-          <img src="images/smallcaselogo.png" alt="product universe1 image" />
+          <img src="images/smallcaselogo.png" alt="product universe1" />
           <p classname="text-small text-muted">Thematic Investment Platform</p>
         </div>
         <div className="col-4 p-3 mt-5">
           <img
             src="images/streakLogo.png"
-            alt="product universe2 image"
+            alt="product universe2"
             style={{ width: "50%" }}
           />
           <p classname="text-small text-muted">Algo & stratergy platform</p>
@@ -24,7 +24,7 @@ function Universe() {
         <div className="col-4 p-3 mt-5">
           <img
             src="images/sensibullLogo.svg"
-            alt="product universe3 image"
+            alt="product universe3"
             style={{ width: "50%" }}
           />
           <p classname="text-small text-muted">Option Trading Platform</p>
@@ -32,7 +32,7 @@ function Universe() {
         <div className="col-4 p-3 mt-5">
           <img
             src="images/goldenpiLogo.png"
-            alt="product universe 4 image"
+            alt="product universe 4 "
             style={{ width: "50%" }}
           />
           <p classname="text-small text-muted">Bonds trading platform</p>
@@ -40,7 +40,7 @@ function Universe() {
         <div className="col-4 p-3 mt-5">
           <img
             src="images/dittoLogo.png"
-            alt="product universe5 image"
+            alt="product universe5 "
             style={{ width: "50%" }}
           />
           <p classname="text-small text-muted">Insurance</p>
@@ -48,7 +48,7 @@ function Universe() {
         <div className="col-4 p-3 mt-5 ">
           <img
             src="images/zerodhaFundhouse.png"
-            alt="product universe6 image"
+            alt="product universe6 "
             style={{ width: "50%" }}
           />
           <p classname="text-small text-muted">Asset Management</p>
