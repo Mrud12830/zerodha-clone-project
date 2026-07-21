@@ -14,43 +14,43 @@ All rights reserved.
             </div>  
             <div className="col mb-5">
               <p>Company</p>
-                   <a href="" style={{textDecoration:"none"}}>About</a>
+                   <a href="/" style={{textDecoration:"none"}}>About</a>
                    <br/>
-                   <a href="" style={{textDecoration:"none"}}>Product</a>
+                   <a href="/" style={{textDecoration:"none"}}>Product</a>
                    <br/>
-                   <a href="" style={{textDecoration:"none"}}>Pricing</a>
+                   <a href="/" style={{textDecoration:"none"}}>Pricing</a>
                    <br/>
-                   <a href="" style={{textDecoration:"none"}}>Referral program</a>
+                   <a href="/" style={{textDecoration:"none"}}>Referral program</a>
                    <br/>
-                   <a href="" style={{textDecoration:"none"}}>Careers</a>
+                   <a href="/" style={{textDecoration:"none"}}>Careers</a>
                    <br/>
-                   <a href="" style={{textDecoration:"none"}}>Zerodha.tech</a>
+                   <a href="/" style={{textDecoration:"none"}}>Zerodha.tech</a>
                    <br/>
                    <a href="" style={{textDecoration:"none"}}>Press & media</a>
                    <br/>
-                   <a href="" style={{textDecoration:"none"}}>Zerodha cares (CSR)</a>
+                   <a href="/" style={{textDecoration:"none"}}>Zerodha cares (CSR)</a>
                    <br/>
             </div>
             <div className="col mb-5">
               <p>Support</p>
-                   <a href="" style={{textDecoration:"none"}}>Contact</a>
+                   <a href="/" style={{textDecoration:"none"}}>Contact</a>
                    <br/>
-                   <a href="" style={{textDecoration:"none"}}>Support portal</a>
+                   <a href="/" style={{textDecoration:"none"}}>Support portal</a>
                    <br/>
-                   <a href="" style={{textDecoration:"none"}}>Z-Connect blog</a>
+                   <a href="/" style={{textDecoration:"none"}}>Z-Connect blog</a>
                    <br/>
-                   <a href="" style={{textDecoration:"none"}}>List of charges</a>
+                   <a href="/" style={{textDecoration:"none"}}>List of charges</a>
                    <br/>
-                   <a href="" style={{textDecoration:"none"}}>Downloads & resources</a>
+                   <a href="/" style={{textDecoration:"none"}}>Downloads & resources</a>
                    <br/>
             </div>
             <div className="col mb-5" >
                <p>Account</p>
-                    <a href="" style={{textDecoration:"none"}}>Open an account</a>
+                    <a href="/" style={{textDecoration:"none"}}>Open an account</a>
                    <br/>
-                   <a href="" style={{textDecoration:"none"}}>Fund transfer</a>
+                   <a href="/" style={{textDecoration:"none"}}>Fund transfer</a>
                    <br/>
-                   <a href="" style={{textDecoration:"none"}}>60 days challenge</a> 
+                   <a href="/" style={{textDecoration:"none"}}>60 days challenge</a> 
                    <br/>
             </div>   
           </div>
