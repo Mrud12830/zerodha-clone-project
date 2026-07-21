@@ -4,15 +4,14 @@ const jwt = require("jsonwebtoken");
 const UserModel = require("./model/UserModel");
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require('body-parser');
-const cors= require('cors');
-const {HoldingsModel}=require('./model/HoldingsModel');
-const {PositionsModel}=require('./model/PositionsModel');
-const{OrdersModel} = require("./model/OrdersModel");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const { HoldingsModel } = require("./model/HoldingsModel");
+const { PositionsModel } = require("./model/PositionsModel");
+const { OrdersModel } = require("./model/OrdersModel");
 
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
-
 
 const app = express();
 
@@ -187,61 +186,57 @@ app.use(express.json());
 //   res.send("Done!");
 // });
 
-app.get("/allHoldings", async(req,res)=>{
-    let allHoldings = await HoldingsModel.find({});
-    res.json(allHoldings);
+app.get("/allHoldings", async (req, res) => {
+  let allHoldings = await HoldingsModel.find({});
+  res.json(allHoldings);
 });
-app.get("/allPositions", async(req,res)=>{
-    let allPositions = await PositionsModel.find({});
-    res.json(allPositions);
+app.get("/allPositions", async (req, res) => {
+  let allPositions = await PositionsModel.find({});
+  res.json(allPositions);
 });
 
-app.post('/newOrder', async(req,res)=>{
- let newOrder = new OrdersModel({
+app.post("/newOrder", async (req, res) => {
+  let newOrder = new OrdersModel({
     name: req.body.name,
     qty: req.body.qty,
     price: req.body.price,
     mode: req.body.mode,
-    });
- newOrder.save();
- res.send("Order saved!");
-}
-);
-
-app.post("/signup", async (req, res) => {
-    try {
-
-        const { name, email, password } = req.body;
-
-        const existingUser = await UserModel.findOne({ email });
-
-        if (existingUser) {
-            return res.json({
-                success: false,
-                message: "User already exists"
-            });
-        }
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const user = new UserModel({
-            name,
-            email,
-            password: hashedPassword,
-        });
-
-        await user.save();
-
-        res.json({
-            success: true,
-            message: "Signup Successful"
-        });
-
-    } catch (err) {
-        res.status(500).json(err);
-    }
+  });
+  newOrder.save();
+  res.send("Order saved!");
 });
 
+app.post("/signup", async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    const existingUser = await UserModel.findOne({ email });
+
+    if (existingUser) {
+      return res.json({
+        success: false,
+        message: "User already exists",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = new UserModel({
+      name,
+      email,
+      password: hashedPassword,
+    });
+
+    await user.save();
+
+    res.json({
+      success: true,
+      message: "Signup Successful",
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 app.post("/login", async (req, res) => {
   try {
@@ -268,18 +263,15 @@ app.post("/login", async (req, res) => {
     }
 
     // Create JWT Token
-    const token = jwt.sign(
-      { id: user._id },
-      "zerodha_secret_key",
-      { expiresIn: "1d" }
-    );
+    const token = jwt.sign({ id: user._id }, "zerodha_secret_key", {
+      expiresIn: "1d",
+    });
 
     res.json({
       success: true,
       message: "Login Successful",
       token,
     });
-
   } catch (err) {
     console.log(err);
 
@@ -291,51 +283,46 @@ app.post("/login", async (req, res) => {
 });
 
 const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization;
 
-    const token = req.headers.authorization;
+  if (!token) {
+    return res.status(401).json({
+      success: false,
+      message: "Access Denied",
+    });
+  }
 
-    if (!token) {
-        return res.status(401).json({
-            success: false,
-            message: "Access Denied"
-        });
-    }
+  try {
+    const verified = jwt.verify(
+      token.replace("Bearer ", ""),
+      "zerodha_secret_key",
+    );
 
-    try {
+    req.user = verified;
 
-        const verified = jwt.verify(
-            token.replace("Bearer ", ""),
-            "zerodha_secret_key"
-        );
-
-        req.user = verified;
-
-        next();
-
-    } catch (err) {
-
-        res.status(401).json({
-            success: false,
-            message: "Invalid Token"
-        });
-
-    }
-
+    next();
+  } catch (err) {
+    res.status(401).json({
+      success: false,
+      message: "Invalid Token",
+    });
+  }
 };
 
-app.get("/dashboard", verifyToken, (req, res) => {
-
-    res.json({
-        success: true,
-        message: "Welcome to Dashboard",
-        user: req.user
-    });
-
+app.get("/", (req, res) => {
+  res.send("Backend is running successfully");
 });
 
+app.get("/dashboard", verifyToken, (req, res) => {
+  res.json({
+    success: true,
+    message: "Welcome to Dashboard",
+    user: req.user,
+  });
+});
 
 app.listen(PORT, () => {
-    console.log("Server is running on port 3002");
-    mongoose.connect(uri);
-    console.log("DB Connected!");
+  console.log("Server is running on port 3002");
+  mongoose.connect(uri);
+  console.log("DB Connected!");
 });
