@@ -8,7 +8,7 @@ function Footer() {
           <div className="col">
             <img
               src="images/logo.svg"
-              alt="Footer.js image of landing page"
+              alt="Footer.js of landing page"
               style={{ width: "50%" }}
             />
             <p>&copy; 2010 - 2026, Zerodha Broking Ltd. All rights reserved.</p>
