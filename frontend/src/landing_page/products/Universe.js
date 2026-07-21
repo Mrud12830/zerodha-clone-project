@@ -1,40 +1,67 @@
-import React from 'react';
-
+import React from "react";
 
 function Universe() {
-    return ( 
-        <div className="container mt-5">
-            <div className="row text-center "> 
-                <h1>The Zerodha Universe</h1> 
-                <p>Extend your trading and investment experience even further with our partner platforms</p>
-                <div className="col-4 p-3 mt-5 ">
-                    <img src="images/smallcaselogo.png" />
-                    <p classname="text-small text-muted">Thematic Investment Platform</p>
-                </div>
-                <div className="col-4 p-3 mt-5">
-                    <img src="images/streakLogo.png" style={{width:"50%"}}/>
-                    <p classname="text-small text-muted">Algo & stratergy platform</p>
-                </div> 
-                <div className="col-4 p-3 mt-5">
-                    <img src="images/sensibullLogo.svg"style={{width:"50%"}} />
-                    <p classname="text-small text-muted">Option Trading Platform</p>
-                </div>
-                <div className="col-4 p-3 mt-5">
-                    <img src="images/goldenpiLogo.png"style={{width:"50%"}} />
-                    <p classname="text-small text-muted">Bonds trading platform</p>
-                </div>
-                <div className="col-4 p-3 mt-5">
-                    <img src="images/dittoLogo.png" style={{width:"50%"}} />
-                    <p classname="text-small text-muted">Insurance</p>
-                </div> 
-                <div className="col-4 p-3 mt-5 ">
-                    <img src="images/zerodhaFundhouse.png"style={{width:"50%"}} />
-                    <p classname="text-small text-muted">Asset Management</p>
-                </div>
-                <button className='p-2 btn btn-primary fs-5 mb-5' style={{width:"20%", margin: "0 auto"}}>Signup Now</button>
-            </div>
-        </div>  
-     );
+  return (
+    <div className="container mt-5">
+      <div className="row text-center ">
+        <h1>The Zerodha Universe</h1>
+        <p>
+          Extend your trading and investment experience even further with our
+          partner platforms
+        </p>
+        <div className="col-4 p-3 mt-5 ">
+          <img src="images/smallcaselogo.png" alt="product universe1 image" />
+          <p classname="text-small text-muted">Thematic Investment Platform</p>
+        </div>
+        <div className="col-4 p-3 mt-5">
+          <img
+            src="images/streakLogo.png"
+            alt="product universe2 image"
+            style={{ width: "50%" }}
+          />
+          <p classname="text-small text-muted">Algo & stratergy platform</p>
+        </div>
+        <div className="col-4 p-3 mt-5">
+          <img
+            src="images/sensibullLogo.svg"
+            alt="product universe3 image"
+            style={{ width: "50%" }}
+          />
+          <p classname="text-small text-muted">Option Trading Platform</p>
+        </div>
+        <div className="col-4 p-3 mt-5">
+          <img
+            src="images/goldenpiLogo.png"
+            alt="product universe 4 image"
+            style={{ width: "50%" }}
+          />
+          <p classname="text-small text-muted">Bonds trading platform</p>
+        </div>
+        <div className="col-4 p-3 mt-5">
+          <img
+            src="images/dittoLogo.png"
+            alt="product universe5 image"
+            style={{ width: "50%" }}
+          />
+          <p classname="text-small text-muted">Insurance</p>
+        </div>
+        <div className="col-4 p-3 mt-5 ">
+          <img
+            src="images/zerodhaFundhouse.png"
+            alt="product universe6 image"
+            style={{ width: "50%" }}
+          />
+          <p classname="text-small text-muted">Asset Management</p>
+        </div>
+        <button
+          className="p-2 btn btn-primary fs-5 mb-5"
+          style={{ width: "20%", margin: "0 auto" }}
+        >
+          Signup Now
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default Universe;
