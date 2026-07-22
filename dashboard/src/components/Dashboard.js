@@ -15,46 +15,36 @@ import { useEffect } from "react";
 
 const Dashboard = () => {
   useEffect(() => {
-
     const fetchData = async () => {
+      const token = localStorage.getItem("token");
 
-        const token = localStorage.getItem("token");
+      if (!token) {
+        window.location = "/login";
+        return;
+      }
 
-        if(!token){
-            window.location="/login";
-            return;
-        }
+      try {
+        const res = await axios.get(
+          "https://zerodha-clone-project-gd4n.onrender.com/dashboard",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
 
-        try{
+        console.log(res.data);
+      } catch (err) {
+        alert("Unauthorized");
 
-            const res = await axios.get(
-                "http://localhost:3002/dashboard",
-                {
-                    headers:{
-                        Authorization:`Bearer ${token}`
-                    }
-                }
-            );
+        localStorage.removeItem("token");
 
-            console.log(res.data);
-
-        }
-
-        catch(err){
-
-            alert("Unauthorized");
-
-            localStorage.removeItem("token");
-
-            window.location="/login";
-
-        }
-
+        window.location = "/login";
+      }
     };
 
     fetchData();
-
-},[]);
+  }, []);
   return (
     <div className="dashboard-container">
       <GeneralContextProvider>
@@ -71,20 +61,20 @@ const Dashboard = () => {
         </Routes>
       </div>
       <button
-    onClick={() => {
-        localStorage.removeItem("token");
-        window.location = "/login";
-    }}
-    style={{
-        position: "absolute",
-        top: "20px",
-        right: "20px",
-        padding: "10px 20px",
-        cursor: "pointer"
-    }}
->
-    Logout
-</button>
+        onClick={() => {
+          localStorage.removeItem("token");
+          window.location = "/login";
+        }}
+        style={{
+          position: "absolute",
+          top: "20px",
+          right: "20px",
+          padding: "10px 20px",
+          cursor: "pointer",
+        }}
+      >
+        Logout
+      </button>
     </div>
   );
 };
