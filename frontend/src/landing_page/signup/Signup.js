@@ -11,7 +11,7 @@ function SignUp() {
 
     try {
       const res = await axios.post(
-        "https://zerodha-clone-project-gd4n.onrender.com",
+        "https://zerodha-clone-project-gd4n.onrender.com/signup",
         {
           name,
           email,
