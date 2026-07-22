@@ -21,7 +21,7 @@ function Login() {
         localStorage.setItem("token", res.data.token);
 
         alert("Login Successful");
-
+ 
         window.location.href =
           "http://zerodha-clone-project-46ub-lovat.vercel.app";
       } else {
