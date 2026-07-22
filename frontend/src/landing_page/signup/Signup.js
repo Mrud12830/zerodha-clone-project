@@ -10,11 +10,14 @@ function SignUp() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:3002/signup", {
-        name,
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://zerodha-clone-project-gd4n.onrender.com",
+        {
+          name,
+          email,
+          password,
+        },
+      );
 
       alert(res.data.message);
 

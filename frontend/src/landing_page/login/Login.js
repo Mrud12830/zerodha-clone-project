@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-
 function Login() {
-  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,7 +22,8 @@ function Login() {
 
         alert("Login Successful");
 
-        window.location.href = "http://localhost:3001";
+        window.location.href =
+          "http://zerodha-clone-project-46ub-lovat.vercel.app";
       } else {
         alert(res.data.message);
       }
