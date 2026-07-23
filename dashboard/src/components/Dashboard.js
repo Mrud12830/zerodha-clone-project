@@ -1,25 +1,102 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import axios from "axios";
 
 import Apps from "./Apps";
 import Funds from "./Funds";
 import Holdings from "./Holdings";
-
 import Orders from "./Orders";
 import Positions from "./Positions";
 import Summary from "./Summary";
 import WatchList from "./WatchList";
+
 import { GeneralContextProvider } from "./GeneralContext";
-import axios from "axios";
-import { useEffect } from "react";
+
+const FRONTEND_URL = "https://zerodha-clone-project-eta.vercel.app";
+
+const BACKEND_URL = "https://zerodha-clone-project-gd4n.onrender.com";
 
 const Dashboard = () => {
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     // Check URL for token sent from Login
+  //     const params = new URLSearchParams(window.location.search);
+  //     const tokenFromUrl = params.get("token");
+
+  //     // If token came from Login, save it in Dashboard localStorage
+  //     if (tokenFromUrl) {
+  //       localStorage.setItem("token", tokenFromUrl);
+
+  //       // Remove token from URL
+  //       window.history.replaceState(
+  //         {},
+  //         document.title,
+  //         window.location.pathname,
+  //       );
+  //     }
+
+  //     // Get token from Dashboard localStorage
+  //     const token = tokenFromUrl || localStorage.getItem("token");
+
+  //     console.log("Dashboard token:", token);
+
+  //     // If there is no token, redirect to Frontend Login
+  //     if (!token) {
+  //       window.location.href = `${FRONTEND_URL}/login`;
+  //       return;
+  //     }
+
+  //     try {
+  //       const res = await axios.get(`${BACKEND_URL}/dashboard`, {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       });
+
+  //       console.log("Dashboard authorized successfully:", res.data);
+  //     } catch (err) {
+  //       console.log(
+  //         "Dashboard authorization failed:",
+  //         err.response?.data || err.message,
+  //       );
+
+  //       // Remove invalid token
+  //       localStorage.removeItem("token");
+
+  //       // Redirect to Frontend Login
+  //       window.location.href = `${FRONTEND_URL}/login`;
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token");
+      // Get token from URL
+      const params = new URLSearchParams(window.location.search);
+      const tokenFromUrl = params.get("token");
 
+      // If token came from Login, save it
+      if (tokenFromUrl) {
+        localStorage.setItem("token", tokenFromUrl);
+
+        // Remove token from URL
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname,
+        );
+      }
+
+      // Get token
+      const token = tokenFromUrl || localStorage.getItem("token");
+
+      console.log("TOKEN USED BY DASHBOARD:", token);
+
+      // If no token, go back to Frontend Login
       if (!token) {
-        window.location = "/login";
+        window.location.href =
+          "https://zerodha-clone-project-eta.vercel.app/login";
         return;
       }
 
@@ -33,23 +110,34 @@ const Dashboard = () => {
           },
         );
 
-        console.log(res.data);
+        console.log("Dashboard authorized:", res.data);
       } catch (err) {
-        alert("Unauthorized");
+        console.log("Authorization error:", err.response?.data || err.message);
 
         localStorage.removeItem("token");
 
-        window.location = "/login";
+        window.location.href =
+          "https://zerodha-clone-project-eta.vercel.app/login";
       }
     };
 
     fetchData();
   }, []);
+
+  const handleLogout = () => {
+    // Remove Dashboard token
+    localStorage.removeItem("token");
+
+    // Go to Frontend Login
+    window.location.href = `${FRONTEND_URL}/login`;
+  };
+
   return (
     <div className="dashboard-container">
       <GeneralContextProvider>
         <WatchList />
       </GeneralContextProvider>
+
       <div className="content">
         <Routes>
           <Route exact path="/" element={<Summary />} />
@@ -60,11 +148,9 @@ const Dashboard = () => {
           <Route path="/apps" element={<Apps />} />
         </Routes>
       </div>
+
       <button
-        onClick={() => {
-          localStorage.removeItem("token");
-          window.location = "/login";
-        }}
+        onClick={handleLogout}
         style={{
           position: "absolute",
           top: "20px",
