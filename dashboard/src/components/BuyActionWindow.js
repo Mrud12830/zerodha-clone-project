@@ -16,8 +16,8 @@ const BuyActionWindow = ({ uid }) => {
         "https://zerodha-clone-project-gd4n.onrender.com/newOrder",
         {
           name: uid,
-          qty: stockQuantity,
-          price: stockPrice,
+          qty: Number(stockQuantity),
+          price: Number(stockPrice),
           mode: "BUY",
         },
       );
@@ -25,9 +25,13 @@ const BuyActionWindow = ({ uid }) => {
       console.log("Order response:", res.data);
       alert("Order placed successfully!");
 
+      // Close only after successful request
       GeneralContext.closeBuyWindow();
     } catch (error) {
       console.error("Order error:", error);
+      console.error("Response:", error.response?.data);
+      console.error("Status:", error.response?.status);
+
       alert("Failed to place order");
     }
   };
