@@ -26,7 +26,6 @@ const BuyActionWindow = ({ uid }) => {
       alert("Order placed successfully!");
 
       // Close only after successful request
-      GeneralContext.closeBuyWindow();
     } catch (error) {
       console.error("Order error:", error);
       console.error("Response:", error.response?.data);
