@@ -196,14 +196,21 @@ app.get("/allPositions", async (req, res) => {
 });
 
 app.post("/newOrder", async (req, res) => {
-  let newOrder = new OrdersModel({
-    name: req.body.name,
-    qty: req.body.qty,
-    price: req.body.price,
-    mode: req.body.mode,
-  });
-  newOrder.save();
-  res.send("Order saved!");
+  try {
+    let newOrder = new OrdersModel({
+      name: req.body.name,
+      qty: req.body.qty,
+      price: req.body.price,
+      mode: req.body.mode,
+    });
+
+    await newOrder.save();
+
+    res.status(201).send("Order saved!");
+  } catch (error) {
+    console.error("Error saving order:", error);
+    res.status(500).send("Failed to save order");
+  }
 });
 
 app.post("/signup", async (req, res) => {
