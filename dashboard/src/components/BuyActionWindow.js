@@ -24,13 +24,8 @@ const BuyActionWindow = ({ uid }) => {
 
       console.log("Order response:", res.data);
       alert("Order placed successfully!");
-
-      // Close only after successful request
     } catch (error) {
       console.error("Order error:", error);
-      console.error("Response:", error.response?.data);
-      console.error("Status:", error.response?.status);
-
       alert("Failed to place order");
     }
   };
