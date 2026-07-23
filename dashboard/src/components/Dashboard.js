@@ -17,66 +17,13 @@ const FRONTEND_URL = "https://zerodha-clone-project-eta.vercel.app";
 const BACKEND_URL = "https://zerodha-clone-project-gd4n.onrender.com";
 
 const Dashboard = () => {
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     // Check URL for token sent from Login
-  //     const params = new URLSearchParams(window.location.search);
-  //     const tokenFromUrl = params.get("token");
-
-  //     // If token came from Login, save it in Dashboard localStorage
-  //     if (tokenFromUrl) {
-  //       localStorage.setItem("token", tokenFromUrl);
-
-  //       // Remove token from URL
-  //       window.history.replaceState(
-  //         {},
-  //         document.title,
-  //         window.location.pathname,
-  //       );
-  //     }
-
-  //     // Get token from Dashboard localStorage
-  //     const token = tokenFromUrl || localStorage.getItem("token");
-
-  //     console.log("Dashboard token:", token);
-
-  //     // If there is no token, redirect to Frontend Login
-  //     if (!token) {
-  //       window.location.href = `${FRONTEND_URL}/login`;
-  //       return;
-  //     }
-
-  //     try {
-  //       const res = await axios.get(`${BACKEND_URL}/dashboard`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-
-  //       console.log("Dashboard authorized successfully:", res.data);
-  //     } catch (err) {
-  //       console.log(
-  //         "Dashboard authorization failed:",
-  //         err.response?.data || err.message,
-  //       );
-
-  //       // Remove invalid token
-  //       localStorage.removeItem("token");
-
-  //       // Redirect to Frontend Login
-  //       window.location.href = `${FRONTEND_URL}/login`;
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
   useEffect(() => {
     const fetchData = async () => {
       // Get token from URL
       const params = new URLSearchParams(window.location.search);
       const tokenFromUrl = params.get("token");
 
-      // If token came from Login, save it
+      // If token came from Login, save it in Dashboard localStorage
       if (tokenFromUrl) {
         localStorage.setItem("token", tokenFromUrl);
 
@@ -88,36 +35,36 @@ const Dashboard = () => {
         );
       }
 
-      // Get token
+      // Get token from URL or Dashboard localStorage
       const token = tokenFromUrl || localStorage.getItem("token");
 
       console.log("TOKEN USED BY DASHBOARD:", token);
 
-      // If no token, go back to Frontend Login
+      // If no token, redirect to Frontend Login
       if (!token) {
-        window.location.href =
-          "https://zerodha-clone-project-eta.vercel.app/login";
+        window.location.href = `${FRONTEND_URL}/login`;
         return;
       }
 
       try {
-        const res = await axios.get(
-          "https://zerodha-clone-project-gd4n.onrender.com/dashboard",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        const res = await axios.get(`${BACKEND_URL}/dashboard`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
+        });
+
+        console.log("Dashboard authorized successfully:", res.data);
+      } catch (err) {
+        console.log(
+          "Dashboard authorization failed:",
+          err.response?.data || err.message,
         );
 
-        console.log("Dashboard authorized:", res.data);
-      } catch (err) {
-        console.log("Authorization error:", err.response?.data || err.message);
-
+        // Remove invalid token
         localStorage.removeItem("token");
 
-        window.location.href =
-          "https://zerodha-clone-project-eta.vercel.app/login";
+        // Redirect to Frontend Login
+        window.location.href = `${FRONTEND_URL}/login`;
       }
     };
 
