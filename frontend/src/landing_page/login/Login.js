@@ -18,12 +18,17 @@ function Login() {
       );
 
       if (res.data.success) {
-        localStorage.setItem("token", res.data.token);
+        const token = res.data.token;
+
+        // Save token on Frontend
+        localStorage.setItem("token", token);
 
         alert("Login Successful");
 
+        // Send token to Dashboard
         window.location.href =
-          "https://zerodha-clone-project-46ub-lovat.vercel.app";
+          "https://zerodha-clone-project-46ub-lovat.vercel.app/?token=" +
+          encodeURIComponent(token);
       } else {
         alert(res.data.message);
       }
